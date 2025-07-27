@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Integral Impropia - Resolución Guiada</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <div class="max-w-4xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-4">Resolución guiada: Integral Impropia</h1>
+    <p class="text-lg mb-6">Evaluación paso a paso de la integral impropia:</p>
+
+    <div class="bg-white shadow-md rounded p-4 mb-6">
+      <p class="text-xl">\( \int_{3}^{\infty} \frac{1}{x^4} \, dx \)</p>
+    </div>
+
+    <div id="steps"></div>
+
+    <div class="mt-8 text-center">
+      <button onclick="nextStep()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Siguiente paso</button>
+    </div>
+  </div>
+
+  <script>
+    const steps = [
+      {
+        title: "Paso 1: Tipo de Integral",
+        question: "¿Qué tipo de integral es?",
+        options: [
+          { text: "A) Impropia de primera especie", correct: true },
+          { text: "B) Impropia de segunda especie", correct: false },
+          { text: "C) Propia", correct: false }
+        ],
+        explanation: "La integral es impropia de primera especie por tener un límite superior infinito."
+      },
+      {
+        title: "Paso 2: Definición de Impropia",
+        question: "¿Cómo se evalúa la integral impropia?",
+        options: [
+          { text: "A) Con límite: ∫₃ᵇ f(x) dx y b→∞", correct: true },
+          { text: "B) Se calcula directamente sin límite", correct: false },
+          { text: "C) Solo se evalúa en 3", correct: false }
+        ],
+        explanation: "El infinito no es un número, se evalúa con un límite."
+      },
+      {
+        title: "Paso 3: Primitiva",
+        question: "¿Cuál es la primitiva de 1/x⁴?",
+        options: [
+          { text: "A) -1/(3x³)", correct: true },
+          { text: "B) ln|x|", correct: false },
+          { text: "C) -1/(5x⁵)", correct: false }
+        ],
+        explanation: "La primitiva de x⁻⁴ es x⁻³/-3."
+      },
+      {
+        title: "Paso 4: Barrow con límite",
+        question: "¿Cómo se aplica Barrow en una integral impropia?",
+        options: [
+          { text: "A) Se evalúa y luego se toma el límite", correct: true },
+          { text: "B) No se aplica límite porque Barrow no lo requiere", correct: false },
+          { text: "C) Se invierte el orden de F(b) y F(a)", correct: false }
+        ],
+        explanation: "Se evalúa la primitiva en los extremos y luego se toma el límite."
+      },
+      {
+        title: "Paso 5: Evaluación del límite",
+        question: "¿Qué comportamiento tiene el límite?",
+        options: [
+          { text: "A) -1/(3b³) → 0, 1/81 constante", correct: true },
+          { text: "B) 1/(3b³) → 0, pero valor en 3 es 1/27", correct: false },
+          { text: "C) -1/b³ + 1/27, falta el 3", correct: false }
+        ],
+        explanation: "El término con b tiende a cero, y 1/81 es el valor fijo."
+      },
+      {
+        title: "Paso 6: Convergencia",
+        question: "¿Por qué converge la integral?",
+        options: [
+          { text: "A) Porque el límite da un valor finito", correct: true },
+          { text: "B) Porque la función es continua en ℝ", correct: false },
+          { text: "C) Porque x⁴ tiende a ∞", correct: false }
+        ],
+        explanation: "La convergencia se da si el límite existe y es finito."
+      }
+    ];
+
+    let index = 0;
+    function nextStep() {
+      const container = document.getElementById("steps");
+      if (index >= steps.length) return;
+      const step = steps[index++];
+      const html = `
+        <div class="bg-white border-l-4 border-blue-600 shadow-md p-4 mb-6">
+          <h2 class="text-xl font-semibold">${step.title}</h2>
+          <p class="mt-2">${step.question}</p>
+          <ul class="list-disc ml-6 mt-2">
+            ${step.options.map(o => `<li class="${o.correct ? 'text-green-700 font-semibold' : 'text-red-600'}">${o.text}</li>`).join('')}
+          </ul>
+          <p class="mt-2 text-sm text-gray-700 italic">${step.explanation}</p>
+        </div>`;
+      container.insertAdjacentHTML('beforeend', html);
+    }
+  </script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</body>
+</html>
